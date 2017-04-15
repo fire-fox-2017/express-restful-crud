@@ -1,0 +1,10 @@
+{
+  "development": {
+    "username": "edim",
+    "password": "edimdendy",
+    "database": "db_todos",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "logging": false
+  }
+}
