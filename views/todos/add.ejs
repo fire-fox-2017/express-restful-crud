@@ -1,0 +1,47 @@
+<% include ../partials/header %>
+
+    <div class="container">
+        <div class="row">
+            <h4><%= `Add Todo` %></h4>
+            <form action="/todos/create" method="POST" class="col s12" id="formValidate">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input placeholder="Input task" name="task" id="task" type="text" class="validate" required>
+                        <label for="task">Task</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <label>Checklist Completed</label>
+                        <br/>
+                    </div>
+                    <div class="input-field col m4 s6">
+                        <input name="completed" type="checkbox" id="complete_add" />
+                        <label for="complete_add">Completed</label>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <select name="user_id" class="validate" required>
+                        <option value="" disabled selected>Choose your option</option>
+                        <% if(users.length == null || users.length == 0){ %>
+                        <option value="0"><%= `user empty` %></option>
+                        <% }else{ users.forEach((user)=>{ %>
+                        <option value="<%= user.id %>"><%= user.email %></option>
+                      <%  }) } %>
+                      </select>
+                        <label>Select User</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <button class="btn" type="submit">Submit</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+    <% include ../partials/footer %>

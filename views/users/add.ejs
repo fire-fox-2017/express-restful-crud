@@ -1,0 +1,30 @@
+<% include ../partials/header %>
+
+      <div class="container">
+        <div class="row">
+          <h4><%= `Crud User` %></h4>
+            <form action="/users/create" method="POST" class="col s12">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input placeholder="Input task" name="name" id="name" type="text" class="validate" required>
+                        <label for="name"> Name</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input placeholder="Input Email" name="email" id="email" type="email" class="validate" required>
+                        <label for="email">Email</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <button class="btn" type="submit">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+      </div>
+    </div>
+
+    <% include ../partials/footer %>

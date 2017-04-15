@@ -1,0 +1,77 @@
+<% include ../partials/header %>
+
+    <div class="container">
+        <div class="row">
+            <h4><%= `Edit Todo` %></h4>
+            <form action="/todos/update/<%= todos.id %>" method="POST" class="col s12">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input placeholder="Input task" name="task" value="<%= todos.task %>" id="task" type="text" class="validate">
+                        <label for="task">Task</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <label>Checklist Completed</label>
+                        <br/>
+                    </div>
+                    <div class="input-field col m4 s6">
+                        <% if(todos.completed){ %>
+                            <input name="completed" type="checkbox" id="complete" checked/>
+                            <label for="complete">Completed</label>
+                            <% } else { %>
+                                <input name="completed" type="checkbox" id="completed" />
+                                  <label for="completed">Completed</label>
+                                <% } %>
+
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <select name="user_id" class="validate">
+
+                      <% users.forEach(function(user){  %>
+                                  <% if(!user.User == null){ %>
+                                    <% if(user.id == todos.User.id){ %>
+                                      <option value="<%= user.id%>" selected="selected"><%= user.name %></option>
+                                    <% } else { %>
+                                      <option value="<%= user.id%>"><%= user.name %></option>
+                                    <% } %>
+                                  <% } else { %>
+                                      <option value="<%= user.id%>"><%= user.name %></option>
+
+                                  <% } %>
+                      <% }); %>
+                    </select>
+                        <label>Select User</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <button class="btn" type="submit">Submit</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $("#complete").on('change', function() {
+                if ($(this).is(':checked')) {
+                    $(this).attr('value', 'true');
+                } else {
+                    $(this).attr('value', 'false');
+                }
+            });
+            $("#completed").on('change', function() {
+                if ($(this).is(':checked')) {
+                    $(this).attr('value', 'true');
+                } else {
+                    $(this).attr('value', 'false');
+                }
+            });
+        });
+    </script>
+    <% include ../partials/footer %>
