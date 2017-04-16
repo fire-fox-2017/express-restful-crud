@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <div>
+      <h3>Registered Users:</h3>
+      <ul>
+        <% users.forEach((user) => { %>
+          <li>
+            id: <%= user.id%> - email: <%= user.email %>
+            <% let url = "/user/"+user.id%>
+            <a href=<%= url %>><button>View Tasks</button></a>
+            <form action="/deleteUser" method="post">
+              <input class="dum" name="userId" value=<%= user.id %>></input>
+              <button>Delete User</button>
+            </form>
+            <br/>
+          </li>
+        <% });%>
+      </ul>
+    </div>
+    <form action="/" method="post">
+      <h3>Not registered yet?</h3>
+      <input name="email" type="text"></input>
+      <br/>
+      <br/>
+      <button name="createUserButton">Create New User</button>
+    </form>
+    <div>
+      <%  %>
+    </div>
+  </body>
+</html>
