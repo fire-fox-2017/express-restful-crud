@@ -27,10 +27,11 @@ router.post('/add', (req, res, next) => {
   // ambil data dari submit form dengan action /add
   let todoTitle = req.body.title; // tag input di dalam form /add dengan tag input dengan id = title dan name = title.
 
+
   //insert data dari form ke model todo
   db.Todo.create({
     'title': todoTitle,
-    'isCompleted': false
+    'isComplete': false
   })
   .then(todo => {
     //alihkan ke localhost:3000/

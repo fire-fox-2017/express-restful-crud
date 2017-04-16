@@ -2,7 +2,12 @@
 module.exports = function(sequelize, DataTypes) {
   var Todo = sequelize.define('Todo', {
     title: DataTypes.STRING,
-    isComplete: DataTypes.BOOLEAN,
+    isComplete: {
+      type: DataTypes.BOOLEAN, 
+      defaultValues: function() {
+        return false;
+      },
+    }, 
     userId: DataTypes.INTEGER
   }, {
     classMethods: {

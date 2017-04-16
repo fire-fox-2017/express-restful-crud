@@ -23,7 +23,7 @@
         if (todos.length < 1) {
       %>
         <div class="user">
-          <p>Tidak ada data user</p>
+          <p>Tidak ada todo</p>
         </div>
         <%
         } else {
@@ -33,7 +33,7 @@
           <ul>
             <li><%- no %></li>
             <li><%- todo.title %></li>
-            <li><%- todo.isCompleted %></li>
+            <li><%- todo.isComplete %></li>
           </ul>
           <%
             no++;
