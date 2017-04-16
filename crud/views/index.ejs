@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+
+    <form action="/add" method="POST">
+      <div>
+        <input type="text" id="title" name="title">
+        <label for="title">Title</label>
+      </div>
+      <div class="submit">
+        <button type="submit">Submit</button>
+      </div>
+    </form>
+    
+    <div class="todos-parent">
+      <%
+        if (todos.length < 1) {
+      %>
+        <div class="user">
+          <p>Tidak ada data user</p>
+        </div>
+        <%
+        } else {
+          let no = 1;
+          todos.forEach(todo => {
+        %>
+          <ul>
+            <li><%- no %></li>
+            <li><%- todo.title %></li>
+            <li><%- todo.isCompleted %></li>
+          </ul>
+          <%
+            no++;
+          });
+        }
+        %>
+
+    </div>
+
+  </body>
+</html>
