@@ -1,0 +1,29 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+input[placeholder], [placeholder], *[placeholder] {
+    color: red !important;
+}
+
+table {
+    font-family: arial, sans-serif;
+    /*border-collapse: collapse;*/
+    width: 85%;
+}
+
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 8px;
+
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
