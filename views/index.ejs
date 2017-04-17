@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400, 600" rel="stylesheet">
+    <style>
+      table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+      }
+
+      td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+      }
+
+      tr:nth-child(even) {
+          background-color: #dddddd;
+      }
+      </style>
+  </head>
+  <body>
+    <!-- <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p> -->
+
+    <div class="todolist">
+      <div class="container">
+        <div>
+          <h2><%= title %> </h2>
+          <form action="/create" method="GET">
+            <button type="submit">Add Memo</button>
+          </form>
+          <br>
+          <table>
+              <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Title</th>
+                    <th>Complete</th>
+                    <th>Email</th>
+                    <th>CreatedAt</th>
+                    <th>Update Memo</th>
+                    <th>Delete Memo</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- handling data dari router -->
+                <!-- bila ada data -->
+                <!-- iterasi setiap data dari array todos -->
+                <%
+                if (dataTodo.length < 1) {
+                %>
+                <tr>
+                  <td><p class="flow-text">Tidak ada data</p></td>
+                </tr>
+                <%
+                } else {
+                  let no = 1;
+                  dataTodo.forEach(todo => {
+                    if(todo.User !== null){
+                %>
+                <tr>
+                  <!-- tampilkan setiap atribut dari instance User -->
+                  <td><%- no %></td>
+                  <td><%- todo.title %></td>
+                  <% if(todo.isComplete === true) {%>
+                    <td>Finished</td>
+                    <% } else { %>
+                      <td>Not yet</td>
+                      <% } %>
+                  <td><%- todo.User.email %></td>
+                  <td><%- todo.createdAt %></td>
+                  <td><a href="/edit/<%- todo.id%>">Edit</a></td>
+                  <td><a href="/delete/<%- todo.id%>" onclick="return confirm('Ar you sure want to delete this memo?')">Delete</a></td>
+                </tr>
+                <%
+                    no++;
+                  }
+                  });
+                }
+                %>
+              </tbody>
+            </table>
+        </div>
+    </div>
+  </div>
+  </body>
+</html>

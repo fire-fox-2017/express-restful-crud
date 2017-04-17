@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Add New Memo</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400, 600" rel="stylesheet">
+  </head>
+  <body>
+    <div class="todolist">
+      <div class="container">
+        <form action="/create" method="POST">
+          <div>
+            <h2>Add New Memo</h2>
+            <div>
+              <label for="title">Title</label>
+              <input type="text" name="title" placeholder="Please input your new memo">
+            </div>
+            <br>
+            <div>
+              <label>Select User:</label>
+              <select name="user">
+                <% dataUsers.forEach(user => { %>
+                <option value="<%- user.id%>"> <%- user.email %> </option>
+                <% }) %>
+              </select>
+            </div>
+            <br>
+            <div>
+              <label>Complete:</label>
+              <input type="checkbox" name="isComplete" />
+            </div>
+            <br>
+            <button type="submit" name="button">Submit</button>
+          </div>
+        </form>
+    </div>
+  </div>
+  </body>
+</html>

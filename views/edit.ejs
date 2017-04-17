@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400, 600" rel="stylesheet">
+  </head>
+  <body>
+    <!-- <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p> -->
+
+    <div class="todolist">
+      <div class="container">
+        <form action="/edit/<%- dataTodo.id %>" method="POST">
+          <div>
+            <h2>Edit your memo</h2>
+            <div>
+              <label for="title">Title</label>
+              <input type="text" name="title" value="<%- titleValue%>" placeholder="Please input your new memo">
+            </div>
+            <br>
+            <div>
+              <label>Select User:</label>
+              <select name="userId">
+                <% dataUsers.forEach(user => { %>
+                  <% if(user.id == dataTodo.userId) {%>
+                    <option value="<%- user.id%>" selected> <%- user.email %> </option>
+                    <% } else {%>
+                      <option value="<%- user.id%>"> <%- user.email %> </option>
+                      <% } %>
+                <% }) %>
+              </select>
+            </div>
+            <br>
+            <div>
+              <label>Complete:</label>
+              <% if(dataTodo.isComplete == false) {%>
+                <input type="checkbox" name="isComplete" checked="checked"/>
+                <% } else { %>
+                  <input type="checkbox" name="isComplete"/>
+                  <% } %>
+            </div>
+            <br>
+            <button type="submit" name="button">Submit</button>
+          </div>
+        </form>
+    </div>
+  </div>
+  </body>
+</html>
