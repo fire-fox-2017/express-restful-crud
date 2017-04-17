@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+
+
+
+<!--
+ 		<form action="/users/createUser" method="post">
+			Name: <input type="text" name="user_name"><br>
+			email: <input type="text" name="user_email"><br>
+			Memo: <input type="text" name="user_memo"><br>
+	    <input type="submit" value="OK">
+
+		</form>
+ -->
+
+		<form action="/addMemo" method="post">
+<!--
+			User ID: <input type="text" name="user_id"><br>
+ 			email: <input type="text" name="user_email"><br>			
+ --> 
+       <select name="user_id">
+       <% users.forEach ( u => { %>
+
+        <option value="<%=u.id%>"><%= u.email %></option>
+
+      <% }) %>
+
+      </select>
+
+ 			Memo: <input type="text" name="title">
+	    <input type="submit" value="OK">
+
+		</form>
+
+    <br><br>
+
+
+		<table>
+			<thead>
+        <tr>
+	        <th>No</th>
+	        <th>title</th>
+	        <th>status</th>
+	        <th>user email</th>
+	        <th>created at</th>
+	        <th>Edit/Delete</th>
+        </tr>
+			</thead>
+			<tbody>
+				<% 
+					if(memos.length < 1) { 
+				%> 
+					<tr>
+						<td><p>No Data :( </p></td>
+					</tr>
+
+				<% 
+					} else {
+						for (let i = 0 ; i < memos.length ; i++) {
+				%>
+							<tr>
+								<td><%= i+1 %></td>
+								<td><%= memos[i].title %></td>
+								<% let complete_str = memos[i].is_complete? 'x' : 'o' %>
+								<td><%= complete_str %></td>
+
+								<td><%= memos[i].email %></td>
+			
+								<td><%= helper.dateFormatter(memos[i].createdAt) %></td>
+								<td><a href="/editMemo/<%= memos[i].id %>">edit</a> | <a href="/deleteMemo/<%= memos[i].id %>" onclick="return confirm('Are you sure?')">del</a></td>
+
+							</tr>
+				<%		
+						}
+					}
+
+				%>
+			</tbody>
+		</table>
+
+
+
+
+  </body>
+</html>

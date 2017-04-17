@@ -1,0 +1,10 @@
+{
+  "development": {
+    "username": "nextacademy",
+    "password": "nextacademy",
+    "database": "h8_w03d05_03_crud",
+    "host": "127.0.0.1",
+    "port": "5432",
+    "dialect": "postgres"
+  }
+}
