@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Todos</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>Memos Todo</h1><br>
+    <button type="submit" name="button" onclick="window.location.href='/memos';">Add memos</button>
+    <table>
+      <thead>
+        <th>Nomor</th>
+        <th>Tittle</th>
+        <th>E-mail</th>
+        <th>CreatedAt</th>
+        <th>Change</th>
+      </thead>
+      <tbody>
+        <% nomor=1%>
+          <% todos.forEach( function(todo) { %>
+          <tr>
+            <td><%= nomor %></td>
+            <td><%= todo.title %></td>
+            <td><%= todo.User.email %></td>
+            <td><%= todo.help %></td>
+            <td>
+              <a href="/memos/edit/<%=todo.id%>"><button type="submit">Edit</button></a>
+              |
+              <a href="/memos/delete/<%=todo.id%>" onclick="return confirm('Are you sure?')"><button type="submit">Delete</button></a>
+            </td>
+            <% nomor++ %>
+          </tr>
+          <% }) %>
+      </tbody>
+    </table>
+  </body>
+</html>

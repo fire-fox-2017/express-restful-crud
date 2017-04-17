@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Todos</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>Page Edit</h1>
+
+    <form action="/memos/update/<%= tasks.id %>" method="post">
+    ID Todo : <%= tasks.id %></br></br>
+    Email :
+    <select name=userId>
+      <% users.forEach( function(user) { %>
+        <%if (tasks.User.id === user.id){%>
+          <option value="<%=user.id%>" name="id" selected><%= user.email %></option>
+        <%} else {%>
+        <option value="<%=user.id%>" name="id"><%= user.email %></option>
+        <% }}) %>
+    </select><br><br>
+    <%if (tasks.is_complete == true) {%>
+      <input type="checkbox" id="cbox2" name="complete" checked>
+      <label for="cbox2">Is Completed</label><br><br>
+    <%} else {%>
+      <input type="checkbox" id="cbox2" name="complete" >
+      <label for="cbox2">Is Completed</label><br><br>
+      <%}%>
+
+    Edit Todo :<br>
+    <textarea name="memo" rows="8" cols="40"><%= tasks.title %></textarea><br></br></br>
+
+    <input type="submit" value="Update MEMO">
+  </form>
+  </body>
+</html>

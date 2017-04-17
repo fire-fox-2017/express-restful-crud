@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Todos</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>Form Add memo</h1>
+    <form action="/memos/add" method="post">
+    Choose User
+    <select name=userId>
+      <% users.forEach( function(user) { %>
+      <option value="<%=user.id%>" name="id"><%= user.email %></option>
+      <% }) %>
+    </select><br><br>
+    <input type="checkbox" id="cbox2" name="complete">
+    <label for="cbox2">Is Completed</label><br><br>
+    Input Todo :<br>
+    <textarea name="memo" rows="8" cols="40"></textarea><br>
+    <input type="submit" value="Submit">
+    </form>
+  </body>
+</html>
