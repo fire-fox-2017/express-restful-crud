@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>New Task</title>
+  </head>
+  <body>
+    <form action="/edit/<%= todo.id %>" method="post">
+      <input type="text" name="title" value="<%= search %>" placeholder="Your task here...">
+      <select name="userid">
+        <% users.forEach(user => { %>
+          <% if(user.id == todo.UserId) {%>
+            <option value="<%= user.id%>" selected><%= user.email %></option>
+          <%} else {%>
+            <option value="<%= user.id%>"><%= user.email %></option>
+          <%}%>
+        <% }) %>
+      </select>
+      <% if(todo.is_complete == true) {%>
+        <input type= "checkbox" name="status" checked="chekced">
+      <%}else{%>
+        <input type= "checkbox" name="status">
+      <%}%>
+      <button type="submit">update</button>
+    </form>
+  </body>
+</html>

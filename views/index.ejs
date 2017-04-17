@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <form action="/create" method="get">
+      <button type="submit">add Task</button>
+    </form>
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Is_Complete</th>
+          <th>User_Email</th>
+          <th>Created_At</th>
+          <th>Update_Memo</th>
+          <th>Delete_Memo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% tampilkan.forEach(list => { %>
+          <tr>
+            <td><%= list.title %></td>
+          <% if (list.isComplete === true) {%>
+            <td>DONE</td>
+          <%} else {%>
+            <td>NOT YET</td>
+          <%}%>
+            <td><%= list.User.email %></td>
+            <td><%= list.createdAt %></td>
+            <td><a href="/edit/<%= list.id %>">Edit</a></td>
+            <td><a id="delete" onclick="return confirm('Are you sure?')" href="/delete/<%= list.id %>">Delete</a></td>
+            <br>
+          </tr>
+        <% }) %>
+      </tbody>
+
+  </body>
+</html>
