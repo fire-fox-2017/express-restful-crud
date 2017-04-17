@@ -1,0 +1,21 @@
+<h1><%= title %></h1>
+
+		<form action="/editMemo/<%=memo.id%>" method="post">
+<!-- 
+			User ID: <input type="text" name="user_id" value="<%= memo.user_id%>"><br>
+			email: <input type="text" name="user_email"><br>			
+ --> 
+
+       <select name="user_id">
+
+        <option value="<%=memo.user_id%>"><%= user.email %></option>
+
+      </select>
+
+
+ 			Memo: <input type="text" name="title" value="<%= memo.title %>"><br>
+	    <input type="submit" value="OK">
+
+		</form>
+
+
