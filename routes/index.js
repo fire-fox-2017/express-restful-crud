@@ -120,7 +120,19 @@ router.get('/editMemo/:id', (req, res, next) => {
 router.post('/editMemo/:id', (req, res, next) => {
 	var memo_id = req.params.id
 	var memo_title = req.body.title;
-	db.Memo.update({title: memo_title} , {fields: ['title'], where: {id: memo_id}})
+
+	var memo_is_complete = req.body.is_complete;
+	// if (!req.body.hasOwnProperty('is_complete'))
+	// 	memo_is_complete = false;
+
+	if(req.body.is_complete == undefined)
+		memo_is_complete = false;
+	console.log(memo_is_complete);
+
+	console.log(req.body);
+
+
+	db.Memo.update({title: memo_title, is_complete: memo_is_complete} , {fields: ['title', 'is_complete'], where: {id: memo_id}})
 	.then (memo => {
 		console.log("update success");
   	res.redirect('/');

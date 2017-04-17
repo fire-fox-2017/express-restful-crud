@@ -74,7 +74,7 @@
 								<td><%= memos[i].email %></td>
 			
 								<td><%= helper.dateFormatter(memos[i].createdAt) %></td>
-								<td><a href="/editMemo/<%= memos[i].id %>">edit</a> | <a href="/deleteMemo/<%= memos[i].id %>">del</a></td>
+								<td><a href="/editMemo/<%= memos[i].id %>">edit</a> | <a href="/deleteMemo/<%= memos[i].id %>" onclick="return confirm('Are you sure?')">del</a></td>
 
 							</tr>
 				<%		
