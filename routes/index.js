@@ -45,21 +45,6 @@ router.post('/deleteUser', function(req, res) {
   }
 });
 
-
-// show user page
-router.get('/user/:id', function(req, res) {
-  let userId = req.params.id;
-  User.find({where: {id: userId}}).then((user) => {
-    Todo.findAll({where: {user_id: userId}}).then((todos) => {
-      res.render('user', {todos: todos, user: user});
-    }).catch((err) => {
-      res.send(err);
-    });
-  }).catch((err) => {
-    res.send(err);
-  });
-});
-
 // add new task
 router.post('/addTodo', function(req, res) {
   let userId = req.body.id;
@@ -67,12 +52,12 @@ router.post('/addTodo', function(req, res) {
   if (task.length > 0) {
     Todo.create({title: task, user_id: userId})
       .then((task) => {
-        res.redirect("/user/"+userId);
+        res.redirect("back");
       }).catch((err) => {
         res.send(err);
       });
   } else {
-    res.redirect("/user/"+userId);
+    res.redirect("back");
   }
 });
 
@@ -118,55 +103,34 @@ router.post('/deleteTask', function(req, res) {
 });
 
 
-
-// get all todos
+// show all todos
 router.get('/todos', function(req, res) {
-  Todo.findAll().then((todos) => {
-    res.json(todos);
-  });
-});
-
-// get single todo
-router.get('/todo/:id', function(req, res) {
-  Todo.find({
-    where: {id: req.params.id}
-  }).then((todo) => {
-    res.json(todo);
-  });
-});
-
-// add new todos
-router.post('/todos', function(req,res) {
-  Todo.create({
-    title: req.body.title,
-    user_id: req.body.user_id
-  }).then((todo) => {
-    res.json(todo);
-  });
-});
-
-// update single todo
-router.put('/todo/:id', function(req, res) {
-  Todo.find({
-    where: {id: req.params.id}
-  }).then((todo) => {
-    todo.updateAttributes({
-      title: req.body.title,
-      is_complete: req.body.complete
-    }).then((todo) => {
-      res.send(todo);
+  Todo.findAll({include: [{model: User}]})
+    .then((todos) => {
+      // res.json(todos);
+      res.render('todos',{todos: todos});
+    }).catch((err) => {
+      res,send(err);
     });
-  });
 });
 
-// delete a single todo
-router.delete('/todo/:id', function(req, res) {
-  Todo.destroy({
-    where: {id: req.params.id}
-  }).then((todo) => {
-    res.json(todo);
-  });
-});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function timeConvert(time) {
   let newTime = new Date(time);

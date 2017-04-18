@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Todos</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <%function timeConvert(time) { %>
+    <%let newTime = new Date(time);%>
+    <%let day = newTime.getDay();%>
+    <%let date = newTime.getDate();%>
+    <%let month = newTime.getMonth();%>
+    <%let year = newTime.getFullYear();%>
+    <%let hours = newTime.getHours();%>
+    <%let minutes = newTime.getMinutes();%>
+    <%if (String(minutes).length < 2) {%>
+      <%minutes = "0"+String(minutes);%>
+    <%}%>
+    <%let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];%>
+    <%let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];%>
+    <%return `${days[day]}, ${date}-${months[month]}-${year}, ${hours}:${minutes}`;%>
+  <%}%>
+</head>
+<body>
+  <h1>To do List</h1>
+  <table>
+    <tr>
+      <th>id</th>
+      <th>Task Memo</th>
+      <th>Created At</th>
+      <th>Updated At</th>
+      <th>User email</th>
+    </tr>
+    <% todos.forEach((todo) => { %>
+    <%  if (todo.User !== null) { %>
+      <td><%= todo.id %> </td>
+      <td><%= todo.title %></td>
+      <td><%= timeConvert(todo.createdAt) %> </td>
+      <td><%= timeConvert(todo.updatedAt) %> </td>
+      <td><%= todo.User.email %></td>
+    <%  }%>
+    <tr>
+
+    </tr>
+    <% }); %>
+  </table>
+
+
+
+
+  <br/>
+  <br/>
+  <a href="/"><button>Home</button></a>
+</body>
+</html>

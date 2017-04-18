@@ -22,7 +22,7 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate: function(models) {
         // associations can be defined here
-        User.hasMany(models.Todo, {foreignKey: "user_id"});
+        User.hasMany(models.Todo, {foreignKey: "user_id", onDelete: "cascade"});
       }
     }
   });

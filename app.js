@@ -7,7 +7,8 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
-// var user = require('./routes/user');
+var user = require('./routes/user');
+// var todos = require('./routes/todos');
 
 var app = express();
 
@@ -25,7 +26,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
-// app.use('/user', user);
+app.use('/user', user);
+// app.use('/todos', todos);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -44,5 +46,21 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+function timeConvert(time) {
+  let newTime = new Date(time);
+  let day = newTime.getDay();
+  let date = newTIme.getDate();
+  let month = newTime.getMonth();
+  let year = newTime.getFullYear();
+  let hours = newTime.getHours();
+  let minutes = newTime.getMinutes();
+  let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  return `${days[day]}, ${day}-${months[month]}-${year}, ${hours}:${minutes}`;
+}
+
+app.locals.timeConvert = timeConvert;
+
 
 module.exports = app;

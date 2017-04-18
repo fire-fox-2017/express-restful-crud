@@ -9,30 +9,28 @@
     <p>Welcome to <%= title %></p>
     <div>
       <h3>Registered Users:</h3>
-      <ul>
+      <% let selectId = "" %>
+      <form action='/user' method="post">
+      <select name="userId">
         <% users.forEach((user) => { %>
-          <li>
-            id: <%= user.id%> - email: <%= user.email %>
-            <% let url = "/user/"+user.id%>
-            <a href=<%= url %>><button>View Tasks</button></a>
-            <form action="/deleteUser" method="post">
-              <input class="dum" name="userId" value=<%= user.id %>></input>
-              <button>Delete User</button>
-            </form>
-            <br/>
-          </li>
-        <% });%>
-      </ul>
+          <option value=<%= user.id%>><%= user.email %></option>
+          <% url = "/user/"+user.id%>
+        <% }); %>
+      </select>
+      <input type="submit" value="View Todos"></input>
+    </form>
     </div>
     <form action="/" method="post">
       <h3>Not registered yet?</h3>
       <input name="email" type="text"></input>
       <br/>
       <br/>
-      <button name="createUserButton">Create New User</button>
+      <button>Create New User</button>
     </form>
     <div>
-      <%  %>
+      <br/>
+      <h3>View all to-dos registered by Users</h3>
+      <a href="/todos"><button>View all things to do</button></a>
     </div>
   </body>
 </html>
