@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Page</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+  <h1>Welcome to user to do list</h1>
+  <h2>User:</h2>
+  <p>id: <%= user.id %></p>
+  <p>email: <strong><%= user.email %></strong></p>
+  <h2>Tasks: </h2>
+  <% if (todos.length > 0) { %>
+    <table>
+      <tr>
+        <th>Id</th>
+        <th>Task Memo</th>
+        <th>Status</th>
+        <th>Created At</th>
+        <th>Updated At</th>
+        <th>Change Status</th>
+        <th>Edit Task Memo</th>
+        <th>Update</th>
+        <th>Delete</th>
+      </tr>
+      <% todos.forEach((todo) => { %>
+        <% let stat = "" %>
+        <% if (todo.is_complete) { %>
+        <%  stat = "completed"; %>
+        <%} else { %>
+        <%  stat = "not completed"; %>
+        <%} %>
+        <tr>
+          <form action="/user/updateTask" method="post">
+            <td><input class="dum" name="userId" value=<%= user.id %>></input><%= todo.id %></td>
+            <td><strong><%= todo.title %></strong></td>
+            <td><%= stat %> </td>
+            <td><%= todo.createdAt%></td>
+            <td><%= todo.updatedAt%></td>
+            <td><input class="dum" name="taskId" value=<%= todo.id %>></input><input type="checkbox" name="checkbox" value=<%=todo.id%>></td>
+            <td><input name="taskMemo" type="text"></input></td>
+            <td><input type="submit" value="Update"></td>
+          </form>
+          <form onsubmit="return confirm('Are you sure you want to delete task: <%= todo.title %>?');" action="/user/deleteTask" method="post">
+            <input class="dum" name="userId" value=<%= user.id %>></input>
+            <input class="dum" name="taskId" value=<%= todo.id %>>
+            <td><input name="delete" type="submit" value="Delete"></input></td>
+          </form>
+        </tr>
+      <% }); %>
+    </table>
+  <% } else { %>
+    <% let empty = "Nothing to do" %>
+    <p><%= empty %></p>
+  <% } %>
+  <% let url = "/user/"+user.id%>
+  <form action="/user/addTodo" method="post">
+    <h3>Add new task:</h3>
+    <input class="dum" name="id" value=<%= user.id %>></input>
+    <input name="task" type="text"></input>
+    <button>Create New Task</button>
+  </form>
+  <!-- <form action="/updateTask" method="post">
+    <h3>Update Task Memo:<input class="dum" name="userId" value=<%= user.id %>></input></h3>
+    <p>Task id: <input name="taskId" type="text" class="taskSelect"></input>
+    New memo: <input name="taskMemo" type="text"></input>
+    <button>Update Task</button></p>
+  </form> -->
+  <!-- <form action="/completeTask" method="post">
+    <h3>Update Completed Task:<input class="dum" name="userId" value=<%= user.id %>></input></h3>
+    <p>Task id: <input name="taskId" type="text" class="taskSelect"></input>
+    <button>Complete Task</button></p>
+  </form> -->
+  <!-- <form action="/deleteTask" method="post">
+    <h3>Delete Task:<input class="dum" name="userId" value=<%= user.id %>></input></h3>
+    <p>Task id: <input name="taskId" type="text" class="taskSelect"></input>
+    <button name="deleteButton" onclick="">Delete Task</button></p>
+  </form> -->
+  <br/>
+  <br/>
+  <a href="/"><button>Home</button></a>
+
+</body>
+<script src=#></script>
+
+</html>

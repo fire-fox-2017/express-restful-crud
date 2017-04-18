@@ -1,0 +1,38 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+textarea {
+  width: 10px;
+  height: 15px;
+}
+
+.dum {
+  width: 0px;
+  border: none;
+}
+
+li {
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+.taskSelect {
+  width: 25px;
+}
+
+button {
+}
+
+table {
+  width: 100%;
+}
+
+td {
+  text-align: center;
+}
