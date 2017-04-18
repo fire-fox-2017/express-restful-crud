@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        To Do
+    </title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel='stylesheet' href='/stylesheets/bootstrap.css'/>
+</head>
+
+<body>
+<div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Selamat Datang</h1>
+        <h3>Pilih email anda, lalu tekan submit untuk menampilkan task anda</h3>
+      </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <form action="/todos" method="POST">
+              <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="email">Pilih Email</label>
+                    <select class="form-control" id="email" name="email">
+                        <%
+                        users.forEach(u => { %>
+                          <option value="<%- u.id %>"> <%- u.email %> </option>
+                      <% }) %>
+                    </select>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src='/javascripts/jquery-3.2.1.min.js'></script>
+<script src='/javascripts/bootstrap.js'></script>
+</body>
+
+</html>
