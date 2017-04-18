@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div>
+      <form action="/" method="post">
+      <select name="user_id">
+        <%list_user.forEach(user =>{%>
+        <option value="<%=user.id%>"><%=user.email%></option>
+        <%})%>
+      </select>
+      <br>
+      <br>
+      <input type="text" name="title" placeholder="title">
+      <br>
+      <br>
+      <input type="submit" value="Add">
+    </form>
+    </div>
+
+    <div>
+      <table>
+      <thead>
+      <tr>
+      <th>No</th>
+      <th>Email</th>
+      <th>List Todo</th>
+      <th>Complete</th>
+      <th>Created_at</th>
+      <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <%
+      let i=1;
+      list_memo.forEach(memo =>{
+      %>
+      <tr>
+      <td><%=i%></td>
+      <td><%=memo.email%></td>
+      <td><%=memo.title%></td>
+      <%if(memo.is_complete===true){%>
+      <td>[&#x2714;]</td>
+      <%}else{%>
+      <td>[&#x2715;]</td>
+      <%}%>
+      <td><%= helper.dateFormatter(memo.createdAt) %></td>
+      <td> | <a href="/complete/<%=memo.id%>">&#x2714;</a> | <a href="/uncomplete/<%=memo.id%>">&#x2715;</a> | <a href="/edit/<%= memo.id %>">&#x270E;</a> | <a href="/delete/<%= memo.id %>" onclick="return confirm('Are you sure?')">&#x1f5d1;</a></td>
+      </tr>
+      <%
+      i++;
+      })
+      %>
+      </tbody>
+      <table>
+    </div>
+  </body>
+</html>
