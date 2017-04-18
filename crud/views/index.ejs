@@ -6,69 +6,37 @@
   </head>
   <body>
     <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-    <p><a href="/add">Add new user</a></p>
-      
-      <!-- <form action="todo-add">
-        <select name="users" id="">
-        <% if (todos.User < 1) { %>
-        <option value="">Tidak ada user</option>
-        <%
-          todos.User.forEach(user => {
-        %>
-          <option value=""><%- user.email %></option>
-        <%
-          });
-        }
-        %>
-        </select>
-        <button type="submit">Submit</button>
-      </form> -->
-        
-    
-    <div class="todos-parent">
-      <table>
-        <thead>
-          <tr>
-            <th>No</th>
-            <th>Title</th>
-            <th>isComplete</th>
-            <th>Created At</th>
-            <th>Updated At</th>
-            <th>User id</th>
-          </tr>
-        </thead>
-        <tbody>
-        <%
-        if (todos.length < 1) {
-        %>
+    <form action="/create" method="get">
+      <button type="submit">add Task</button>
+    </form>
+    <table>
+      <thead>
         <tr>
-          <td colspan="3"><p>Tidak ada todo</p></td>
+          <th>Title</th>
+          <th>Is_Complete</th>
+          <th>User_Email</th>
+          <th>Created_At</th>
+          <th>Update_Memo</th>
+          <th>Delete_Memo</th>
         </tr>
-          
-        <%
-        } else {
-          let no = 1;
-          todos.forEach(todo => {
-        %>
+      </thead>
+      <tbody>
+        <% tampilkan.forEach(list => { %>
           <tr>
-            <td><%- no %></td>
-            <td><%- todo.title %></td>
-            <td><%- todo.isComplete %></td>
-            <td><%- todo.createdAt %></td>
-            <td><%- todo.updatedAt %></td>
-            <td><%- todo.userId %></td>
+            <td><%= list.title %></td>
+          <% if (list.isComplete === true) {%>
+            <td>DONE</td>
+          <%} else {%>
+            <td>NOT YET</td>
+          <%}%>
+            <td><%= list.User.email %></td>
+            <td><%= list.createdAt %></td>
+            <td><a href="/edit/<%= list.id %>">Edit</a></td>
+            <td><a id="delete" onclick="return confirm('Are you sure?')" href="/delete/<%= list.id %>">Delete</a></td>
+            <br>
           </tr>
-          <%
-            no++;
-          });
-        }
-        %>
-        </tbody>
-      </table>
-      
-
-    </div>
+        <% }) %>
+      </tbody>
 
   </body>
 </html>
