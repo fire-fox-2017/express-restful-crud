@@ -7,39 +7,66 @@
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
-
-    <form action="/add" method="POST">
-      <div>
-        <input type="text" id="title" name="title">
-        <label for="title">Title</label>
-      </div>
-      <div class="submit">
+    <p><a href="/add">Add new user</a></p>
+      
+      <!-- <form action="todo-add">
+        <select name="users" id="">
+        <% if (todos.User < 1) { %>
+        <option value="">Tidak ada user</option>
+        <%
+          todos.User.forEach(user => {
+        %>
+          <option value=""><%- user.email %></option>
+        <%
+          });
+        }
+        %>
+        </select>
         <button type="submit">Submit</button>
-      </div>
-    </form>
+      </form> -->
+        
     
     <div class="todos-parent">
-      <%
+      <table>
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Title</th>
+            <th>isComplete</th>
+            <th>Created At</th>
+            <th>Updated At</th>
+            <th>User id</th>
+          </tr>
+        </thead>
+        <tbody>
+        <%
         if (todos.length < 1) {
-      %>
-        <div class="user">
-          <p>Tidak ada todo</p>
-        </div>
+        %>
+        <tr>
+          <td colspan="3"><p>Tidak ada todo</p></td>
+        </tr>
+          
         <%
         } else {
           let no = 1;
           todos.forEach(todo => {
         %>
-          <ul>
-            <li><%- no %></li>
-            <li><%- todo.title %></li>
-            <li><%- todo.isComplete %></li>
-          </ul>
+          <tr>
+            <td><%- no %></td>
+            <td><%- todo.title %></td>
+            <td><%- todo.isComplete %></td>
+            <td><%- todo.createdAt %></td>
+            <td><%- todo.updatedAt %></td>
+            <td><%- todo.userId %></td>
+          </tr>
           <%
             no++;
           });
         }
         %>
+        </tbody>
+      </table>
+      
 
     </div>
 

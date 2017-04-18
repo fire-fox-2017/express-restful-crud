@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+    <body>
+      <h1><%= title %></h1>
+      <h3>Sign up</h3>
+      <p><a href="/">Back to home</a></p>
+
+      <div class="form-add-user-parent">
+        <form action="/add" method="POST">
+          <label for="userEmail">Email for new user:</label>
+          <br>
+          <input type="text" id="userEmail" name="userEmail">
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+        <form action="/add/<%= users.id %>" method="POST">
+          <label for="selectedEmail">Select User:</label>
+          <br>
+          <select name="users" id="">
+          <% if (users.length < 1) { %>
+          <option value="">Tidak ada user</option>
+          <% } else {
+          users.forEach(user => {
+          %>
+            <option value="<%= user.id %>"><%- user.email %></option>
+          <%
+          });
+          }
+          %>
+        </select>
+        <button type="submit">Submit</button>
+
+      </form>
+        
+      
+
+    </body>
+</html>
