@@ -5,34 +5,11 @@
   <link rel='stylesheet' href='/stylesheets/style.css' />
 </head>
 
-<%function timeConvert(time) { %>
-  <%let newTime = new Date(time);%>
-  <%let day = newTime.getDay();%>
-  <%let date = newTime.getDate();%>
-  <%let month = newTime.getMonth();%>
-  <%let year = newTime.getFullYear();%>
-  <%let hours = newTime.getHours();%>
-  <%let minutes = newTime.getMinutes();%>
-  <%if (String(minutes).length < 2) {%>
-    <%minutes = "0"+String(minutes);%>
-  <%}%>
-  <%let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];%>
-  <%let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];%>
-  <%return `${days[day]}, ${date}-${months[month]}-${year}, ${hours}:${minutes}`;%>
-<%}%>
-
-<%function deleteConfirm() {%>
-  <%if(Window.confirm("Are you sure you want to delete the task?")) {%>
-    <%return true;%>
-  <%} else {%>
-    <%return false;%>
-  <%}%>
-<%}%>
-
 <body>
   <h1>Welcome to user to do list</h1>
+  <h2>User:</h2>
   <p>id: <%= user.id %></p>
-  <p>email: <%= user.email %></p>
+  <p>email: <strong><%= user.email %></strong></p>
   <h2>Tasks: </h2>
   <% if (todos.length > 0) { %>
     <table>
@@ -59,16 +36,16 @@
             <td><input class="dum" name="userId" value=<%= user.id %>></input><%= todo.id %></td>
             <td><strong><%= todo.title %></strong></td>
             <td><%= stat %> </td>
-            <td><%= timeConvert(todo.createdAt)%></td>
-            <td><%= timeConvert(todo.updatedAt)%></td>
+            <td><%= todo.createdAt%></td>
+            <td><%= todo.updatedAt%></td>
             <td><input class="dum" name="taskId" value=<%= todo.id %>></input><input type="checkbox" name="checkbox" value=<%=todo.id%>></td>
             <td><input name="taskMemo" type="text"></input></td>
             <td><input type="submit" value="Update"></td>
           </form>
-          <form action="/user/deleteTask" method="post">
+          <form onsubmit="return confirm('Are you sure you want to delete task: <%= todo.title %>?');" action="/user/deleteTask" method="post">
             <input class="dum" name="userId" value=<%= user.id %>></input>
             <input class="dum" name="taskId" value=<%= todo.id %>>
-            <td><input name="delete" type="submit" value="Delete"></td>
+            <td><input name="delete" type="submit" value="Delete"></input></td>
           </form>
         </tr>
       <% }); %>

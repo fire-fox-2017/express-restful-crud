@@ -2,14 +2,29 @@ var express = require('express');
 var router = express.Router();
 const User = require("../models").User;
 const Todo = require("../models").Todo;
+const TimeConvert = require("../helpers/helper.js").timeConvert;
 
 router.post('/', function(req, res) {
   let userId = req.body.userId;
   User.find({where: {id: userId}}).then((user) => {
-    Todo.findAll({where: {user_id: userId}}).then((todos) => {
-      res.render('user', {todos: todos, user: user});
-    }).catch((err) => {
-      res.send(err);
+    Todo.findAll({where: {user_id: userId}})
+      .then((todos) => {
+        let newTodos = []
+        todos.forEach((todo) => {
+          let reformatTodo = {
+            id: todo.id,
+            title: todo.title,
+            is_complete: todo.is_complete,
+            user_id: todo.user_id,
+            createdAt: TimeConvert(todo.createdAt),
+            updatedAt: TimeConvert(todo.updatedAt),
+            User: todo.User
+          };
+          newTodos.push(reformatTodo);
+        });
+        res.render('user', {todos: newTodos, user: user});
+      }).catch((err) => {
+        res.send(err);
     });
   }).catch((err) => {
     res.send(err);
@@ -25,7 +40,20 @@ router.post('/addTodo', function(req, res) {
       .then((task) => {
         User.find({where: {id: userId}}).then((user) => {
           Todo.findAll({where: {user_id: userId}}).then((todos) => {
-            res.render('user', {todos: todos, user: user});
+            let newTodos = []
+            todos.forEach((todo) => {
+              let reformatTodo = {
+                id: todo.id,
+                title: todo.title,
+                is_complete: todo.is_complete,
+                user_id: todo.user_id,
+                createdAt: TimeConvert(todo.createdAt),
+                updatedAt: TimeConvert(todo.updatedAt),
+                User: todo.User
+              };
+              newTodos.push(reformatTodo);
+            });
+            res.render('user', {todos: newTodos, user: user});
           }).catch((err) => {
             res.send(err);
           });
@@ -60,8 +88,22 @@ router.post('/updateTask', function(req, res) {
       .then((updated) => {
         let userId = req.body.userId;
         User.find({where: {id: userId}}).then((user) => {
-          Todo.findAll({where: {user_id: user.id}}).then((todos) => {
-            res.render('user', {todos: todos, user: user});
+          Todo.findAll({where: {user_id: user.id}})
+            .then((todos) => {
+              let newTodos = []
+              todos.forEach((todo) => {
+                let reformatTodo = {
+                  id: todo.id,
+                  title: todo.title,
+                  is_complete: todo.is_complete,
+                  user_id: todo.user_id,
+                  createdAt: TimeConvert(todo.createdAt),
+                  updatedAt: TimeConvert(todo.updatedAt),
+                  User: todo.User
+                };
+                newTodos.push(reformatTodo);
+              });
+            res.render('user', {todos: newTodos, user: user});
           }).catch((err) => {
             res.send(err);
           });
@@ -83,7 +125,20 @@ router.post('/deleteTask', function(req, res) {
     .then((destroyed) => {
       User.find({where: {id: userId}}).then((user) => {
         Todo.findAll({where: {user_id: user.id}}).then((todos) => {
-          res.render('user', {todos: todos, user: user});
+          let newTodos = []
+          todos.forEach((todo) => {
+            let reformatTodo = {
+              id: todo.id,
+              title: todo.title,
+              is_complete: todo.is_complete,
+              user_id: todo.user_id,
+              createdAt: TimeConvert(todo.createdAt),
+              updatedAt: TimeConvert(todo.updatedAt),
+              User: todo.User
+            };
+            newTodos.push(reformatTodo);
+          });
+          res.render('user', {todos: newTodos, user: user});
         }).catch((err) => {
           res.send(err);
         });

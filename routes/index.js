@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 const User = require("../models").User;
 const Todo = require("../models").Todo;
+const TimeConvert = require("../helpers/helper.js").timeConvert;
+const Hallo = require("../helpers/helper.js").hallo;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -45,104 +47,29 @@ router.post('/deleteUser', function(req, res) {
   }
 });
 
-// add new task
-router.post('/addTodo', function(req, res) {
-  let userId = req.body.id;
-  let task = req.body.task;
-  if (task.length > 0) {
-    Todo.create({title: task, user_id: userId})
-      .then((task) => {
-        res.redirect("back");
-      }).catch((err) => {
-        res.send(err);
-      });
-  } else {
-    res.redirect("back");
-  }
-});
-
-//  update task memo
-router.post('/updateTask', function(req, res) {
-  let userId = req.body.userId;
-  let taskId = req.body.taskId;
-  let taskMemo = req.body.taskMemo
-  Todo.update({title: taskMemo}, {where: {id: taskId, user_id: userId}})
-    .then((updated) => {
-      res.redirect("/user/"+userId);
-    }).catch((err) => {
-      res.send(err);
-    });
-});
-
-//  update task status
-router.post('/completeTask', function(req, res) {
-  let userId = req.body.userId;
-  let taskId = req.body.taskId;
-  Todo.update({is_complete: true}, {where: {id: taskId, user_id: userId}})
-    .then((updated) => {
-      res.redirect("/user/"+userId);
-    }).catch((err) => {
-      res.send(err);
-    });
-});
-
-// delete task
-router.post('/deleteTask', function(req, res) {
-  let userId = req.body.userId;
-  let taskId = req.body.taskId;
-  if(taskId) {
-    Todo.destroy({where: {id: taskId, user_id: userId}})
-      .then((destroyed) => {
-        res.redirect("/user/"+userId);
-      }).catch((err) => {
-        res.send(err);
-      });
-  } else {
-    res.redirect("/user/"+userId);
-  }
-});
-
-
 // show all todos
 router.get('/todos', function(req, res) {
   Todo.findAll({include: [{model: User}]})
     .then((todos) => {
-      // res.json(todos);
-      res.render('todos',{todos: todos});
+      let newTodos = []
+      todos.forEach((todo) => {
+        let reformatTodo = {
+          id: todo.id,
+          title: todo.title,
+          is_complete: todo.is_complete,
+          user_id: todo.user_id,
+          createdAt: TimeConvert(todo.createdAt),
+          updatedAt: TimeConvert(todo.updatedAt),
+          User: todo.User
+        };
+        newTodos.push(reformatTodo);
+      });
+      res.render('todos',{todos: newTodos});
     }).catch((err) => {
-      res,send(err);
+      res.send('wahoo');
     });
 });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function timeConvert(time) {
-  let newTime = new Date(time);
-  let day = newTime.getDay();
-  let date = newTIme.getDate();
-  let month = newTime.getMonth();
-  let year = newTime.getFullYear();
-  let hours = newTime.getHours() +1;
-  let minutes = newTime.getMinutes();
-  let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-  let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-  return `${days[day]}, ${day}-${months[month]}-${year}, ${hours}:${minutes}`;
-}
 
 module.exports = router;
