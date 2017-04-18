@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        To Do
+    </title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/bootstrap.css' />
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Selamat Datang</h1>
+                <h4> <%- datas[0].User.nama %> </h4>
+                <h4> <%- datas[0].User.email %> </h4>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-md-12">
+            <h4>Daftar Task</h4>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <a href="/todos/add/<%= datas[0].User.id%>"
+               class="btn btn-primary">
+              Tambah Todo
+            </a>
+          </div>
+        </div>
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Todo</th>
+                        <th>Complete</th>
+                        <th>Created At</th>
+                        <th>Updated At</th>
+                        <th>Operation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  <% let no = 1;
+                    datas.forEach(data=> {
+                   %>
+                    <tr>
+                        <th><%- no %></th>
+                        <td><%- data.todo %></td>
+                        <td>
+                          <% if(data.complete == true){ %>
+                            True
+                          <% } else if(data.complete == false) {%>
+                            False
+                          <% } %>
+                        </td>
+                        <td><%- helper.convert(data.createdAt)%></td>
+                        <td><%- helper.convert(data.updatedAt)%></td>
+
+                        <td>
+                          <a href="/todos/edit/<%= data.id%>"
+                             class="btn btn-success">
+                            Edit
+                          </a>
+                          <a href="/todos/delete/<%= data.id%>"
+                             class="btn btn-danger" onclick="return confirm('Apa anda ingin menghapus data ini?');">
+                            Hapus
+                          </a>
+                        </td>
+                    </tr>
+                    <% no ++}) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src='/javascripts/jquery-3.2.1.min.js'></script>
+    <script src='/javascripts/bootstrap.js'></script>
+</body>
+
+</html>

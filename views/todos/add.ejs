@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        To Do
+    </title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/bootstrap.css' />
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="text-center">Fomulir Tambah Todo</h1>
+                <h1></h1>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <form action="/todos/addTodo" method="POST">
+                    <input class="form-control" type="hidden" name="UserId" id="UserId" value="<%-UserId%>">
+                    <div class="form-group">
+                        <label for="todo">To Do</label>
+                        <input type="text" class="form-control" id="todo" name="todo" placeholder="Masukkan To Do">
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" name="checkbox" value="t"> Complete
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <script src='/javascripts/jquery-3.2.1.min.js'></script>
+    <script src='/javascripts/bootstrap.js'></script>
+</body>
+
+</html>
