@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <form class="" action="/" method="post">
+      <select name="email">
+        <%
+      users.forEach(user=>{%>
+          <option value= <%= user.id%>><%= user.email%></option>
+      <%})%>
+      </select>
+      <input type="text" name="todo" value="">
+      <button type="submit" name="button">submit</button>
+    </form>
+
+
+
+  </body>
+</html>
