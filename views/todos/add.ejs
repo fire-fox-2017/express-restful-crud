@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <form method='POST' action='/todos/create'>
+      <input name='task' placeholder='input task'required /> <br /> <br />
+      <input name='completed' type='checkbox' /> Completed <br /> <br />
+      <select name='user_id' required>
+        <option value='' disabled selected>Choose email</option>
+        <%
+        users.forEach(user => {
+        %>
+        <option value='<%= user.id %>'><%= user.email %></option>
+        <%
+        });
+        %>
+      </select> <br /> <br />
+      <button type="submit">Submit</button>
+    </form>
+  </body>
+</html>

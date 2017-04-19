@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <form method='POST' action='/todos/update/<%= todo.id %>'>
+      <input name='task' placeholder='input task' value='<%= todo.task %>' required /> <br /> <br />
+      <% if (todo.completed == true) { %>
+      <input name='completed' type='checkbox' checked /> Completed <br /> <br />
+      <% } else { %>
+      <input name='completed' type='checkbox' /> Completed <br /> <br />
+      <% } %>
+      <select name='user_id' required>
+        <option value='<%= todo.user_id %>' ><%= todo.User.email %></option>
+        <%
+        users.forEach(user => {
+          if (user.id != todo.user_id) {
+        %>
+        <option value='<%= user.id %>'><%= user.email %></option>
+        <%
+          }
+        });
+        %>
+      </select> <br /> <br />
+      <button type="submit">Submit</button>
+    </form>
+  </body>
+</html>
