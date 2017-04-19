@@ -1,0 +1,9 @@
+{
+  "development": {
+    "username": "ambo",
+    "password": "ambo",
+    "database": "restfullcrud",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}
