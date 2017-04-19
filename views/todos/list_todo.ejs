@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Daftar Todo</title>
+  </head>
+  <body>
+    <a href="todos/add_todo">Add Todo</a>
+    <table>
+      <tr>
+        <th>No</th>
+        <th>Task</th>
+        <th>Status</th>
+        <th>Created At</th>
+        <th>Id User</th>
+        <th>Action</th>
+      </tr>
+      <% let i=1; tampil.forEach(todo=>{%>
+      <tr>
+        <td><%= i++ %></td>
+        <td><%= todo.title %></td>
+        <td><%= todo.is_complete %></td>
+        <td><%= helper.format_date(todo.createdAt)%></td>
+        <td><%= todo.id_user %></td>
+        <td><a href="/todos/delete/<%=todo.id%>">Delete</a> || <a href="/todos/edit/<%=todo.id%>">Edit</a></td>
+      </tr>
+      <% }) %>
+    </table>
+  </body>
+</html>
