@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Daftar Todo</title>
+  </head>
+  <body>
+    <a href="todo/addtodo">Add Todo</a>
+    <table>
+      <tr>
+        <th>No</th>
+        <th>Task</th>
+        <th>Status</th>
+        <th>Created At</th>
+        <th>Id User</th>
+        <th>Action</th>
+      </tr>
+      <% let i=1; todos.forEach(todo=>{%>
+      <tr>
+        <td><%= i++ %></td>
+        <td><%= todo.title %></td>
+        <td><%= todo.is_complite %></td>
+        <td><%= helper.formatdate(todo.createdAt)%></td>
+        <td><%= todo.id_user %></td>
+        <td><a href="/todo/delete/<%=todo.id%>">Delete</a> || <a href="/todo/edit/<%=todo.id%>">Edit</a></td>
+      </tr>
+      <% }) %>
+    </table>
+  </body>
+</html>

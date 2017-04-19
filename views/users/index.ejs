@@ -1,0 +1,26 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>EXPRESS RESTFULL CRUD</title>
+  </head>
+<body>
+  <a href="/users/add">Add Users</a>
+  <table>
+  <tr>
+    <th>No</th>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Action</th>
+  </tr>
+  <% let i=1; users.forEach(tampil=>{ %>
+  <tr>
+    <td><%= i++ %></td>
+    <td><%= tampil.name %></td>
+    <td><%= tampil.email %></td>
+    <td><a href="/users/delete/<%= tampil.id %>">Delete</a> <a href="/users/edit/<%= tampil.id %>">Edit</a></td>
+  </tr>
+  <% }) %>
+  </table>
+</body>
+</html>
