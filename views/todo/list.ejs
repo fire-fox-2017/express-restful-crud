@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <title>ToDoList</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <a href = '/todo/add'> Add Your Todo</a>
+    <table border = "1">
+      <thead>
+        <tr>
+          <th> ID </th>
+          <th> Task </th>
+          <th> Complete </th>
+          <th> Email </th>
+          <th> CreatedAt </th>
+          <th> Actions </th>
+        </tr>
+      </thead>
+      <tbody>
+          <% let i = 1; todos.forEach((todo)=>{ %>
+          <tr>
+            <td><%= i++ %> </td>
+            <td><%= todo.task %></td>
+            <td><%= todo.iscompleted %></td>
+            <td><%= todo.User.email %></td>
+            <td><%= newDate.format_date(todo.createdAt) %></td>
+            <td><a href = '/todo/edit/<%= todo.id %>'> Edit</a> | <a href = '/todo/delete/<%= todo.id %>'> Delete</a></td>
+          </tr>
+          <% }) %>
+      </tbody>
+    </table>
+  </body>
+</html>
