@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        <%= title %>
+    </title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+    <table>
+        <thead>
+            <%
+
+
+%>
+                <tr>
+                    <th>no</th>
+                    <th>Memo</th>
+                    <th>completed?</th>
+                    <th>created at</th>
+                    <th>ID</th>
+                </tr>
+
+        </thead>
+        <tbody>
+            <%
+let no=1
+todos.forEach(todos=>{
+        %>
+                <tr>
+                    <th><%= no%></th>
+                    <th><%= todos.title%></th>
+                    <th><%= todos.is_complete%></th>
+                    <th><%= todos.createdAt%></th>
+                    <th><%=todos.id%></th>
+                    <th>
+                      <form class="" action="/lists/updatememo" method="post">
+                        <input type="text" name="todo" value="">
+                        <button type="submit" name="button" value=<%=todos.id %>>Update</button>
+                      </form>
+                    </th>
+                    <th>
+                      <form class="" action="/lists/delete/<%=todos.id %>" method="get">
+
+<!-- var txt;
+var r = confirm("Are you seure?!");
+if (r == true) {
+} else {
+} -->
+                        <button type="submit" name="button" onclick="return confirm('Ar you sure want to delete this memo?')" value=<%=todos.id %>>Delete</button>
+                      </form>
+                    </th>
+                </tr>
+                <%no++})%>
+        </tbody>
+    </table>
+
+
+    <form class="" action="/lists/update" method="post">
+      <input type="text" name="todo" value="">
+      <button type="submit" name="button">complete</button>
+    </form>
+    <form class="" action="/lists/unupdate" method="post">
+      <input type="text" name="todo" value="">
+      <button type="submit" name="button">uncomplete</button>
+    </form>
+
+
+</body>
+
+</html>

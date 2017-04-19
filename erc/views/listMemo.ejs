@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <form class="" action="/previews" method="post">
+      <select name="email">
+        <%
+      users.forEach(user=>{%>
+          <option value= <%= user.id%>><%= user.email%></option>
+      <%})%>
+      </select>
+      <button type="submit" name="button">Submit</button>
+    </form>
+
+
+
+  </body>
+</html>
