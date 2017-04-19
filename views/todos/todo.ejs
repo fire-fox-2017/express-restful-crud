@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <a href="/todos/add">Tambah Todo</a>
+    <table>
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Name</th>
+          <th>Task</th>
+          <th>Completed</th>
+          <th>Email</th>
+          <th>Created At</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%
+          let no = 1;
+          todos.forEach(list => {
+        %>
+        <tr>
+          <td><%= no++ %></td>
+          <td><%= list.User.name %></td>
+          <td><%= list.task %></td>
+          <td><%= list.completed %></td>
+          <td><%= list.User.email  %></td>
+          <td><%= helper.date_format(list.createdAt) %></td>
+          <td><a href="/todos/edit/<%= list.id %>">Edit</a> | <a href="/todos/delete/<%= list.id %>">Delete</a></td>
+        </tr>
+        <%
+          });
+        %>
+      </tbody>
+    </table>
+  </body>
+</html>
